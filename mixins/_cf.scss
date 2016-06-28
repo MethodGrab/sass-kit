@@ -1,0 +1,18 @@
+//
+// Clearfix
+//
+@mixin cf(  ) {
+	*zoom: 1; // IE 6&7
+
+	&:before,
+	&:after {
+		content: ' ';
+		display: table;
+
+		// http://danisadesigner.com/blog/flexbox-clear-fix-pseudo-elements
+		flex-basis: 0;
+		order: 1;
+	}
+
+	&:after { clear: both; }
+}

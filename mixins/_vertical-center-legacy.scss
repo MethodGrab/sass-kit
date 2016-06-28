@@ -1,0 +1,32 @@
+//
+// Vertical Centering for Legacy Browsers
+// css-tricks.com/centering-in-the-unknown
+//
+// @example
+// ```html
+//	<div class="vertical-center">
+//		<div class="vertical-center__content">
+//			This content is vertically centered!
+//		</div>
+//	</div>
+// ```
+//
+@mixin vertical-center-legacy( $content-el: '&__content' ) {
+	// The parent can be any width and height
+	text-align: center;
+
+	// The ghost, nudged to maintain perfect centering
+	&:before {
+		content: '';
+		@include inline-block();
+		height: 100%;
+		vertical-align: middle;
+		margin-right: -0.25em; // Adjusts for spacing, can also use font-size: 0 on parent and manually add the font size back in to child
+	}
+
+	// The element to be centered, can also be of any width and height
+	#{$content-el} {
+		@include inline-block();
+		vertical-align: middle;
+	}
+}

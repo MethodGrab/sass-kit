@@ -1,0 +1,18 @@
+//
+// Alpha Attribute
+// Generates a fallback for alpha colors based on the background & foreground colors
+// @link thesassway.com/intermediate/mixins-for-semi-transparent-colors
+//
+// @param  {string}  $attribute   attribute name
+// @param  {string}  $color       foreground color
+// @param  {string}  $background  background color
+//
+// @example `@include alpha-attribute( 'background-color', rgba(black, 0.5), white );`
+//
+@mixin alpha-attribute( $attribute, $color, $background ) {
+	$percent: alpha( $color ) * 100%;
+	$opaque: opacify( $color, 1 );
+	$solid-color: mix( $opaque, $background, $percent );
+	#{$attribute}: $solid-color;
+	#{$attribute}: $color;
+}

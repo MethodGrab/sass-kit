@@ -1,0 +1,55 @@
+//
+// Fluid Embed
+// Makes media embeds maintain a fixed aspect ratio but adapt to the width of their parent container
+//
+// @link  github.com/suitcss/flex-embed/blob/master/flex-embed.css
+//
+// @example
+// ``` html
+//	<div class="fluid-embed fluid-embed--16x9">
+//		<iframe class="fluid-embed__item" src="..."></iframe>
+//	</div>
+// ```
+//
+@mixin fluid-embed(  ) {
+	position: relative;
+	padding-top: 25px;
+	padding-bottom: 56.25%;	// default to 16x9
+	height: 0;
+
+	//
+	// The use of an explicit descendant class makes this component more flexible.
+	// However, it will work automatically for iframes, embeds, and objects to
+	// account for times when you cannot modify the attributes for 3rd party widget
+	// code.
+	//
+	&__item,
+	iframe,
+	embed,
+	object {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+
+	//
+	// Modifier: 16:9 aspect ratio
+	// @extends .fluid-embed
+	// libsass doesn't support BEM modifiers than start with numbers (#738)
+	//
+	&--r16x9 {
+		padding-bottom: 56.25%;
+	}
+
+	//
+	// Modifier: 4:3 aspect ratio
+	// @extends .fluid-embed
+	// libsass doesn't support BEM modifiers than start with numbers (#738)
+	//
+	&--r4x3 {
+		padding-bottom: 75%;
+	}
+}

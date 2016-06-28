@@ -1,0 +1,10 @@
+//
+// Image Replacement #2
+// Hide the text when regular image replacement wont work
+// Usually required to replace text on <button> elements in Firefox
+//
+@mixin font-crush(  ) {
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+}

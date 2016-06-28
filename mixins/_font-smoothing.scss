@@ -1,0 +1,18 @@
+//
+// Text antialiasing
+// @param  {string}  $value  antialiased (default), subpixel-antialiased, none
+//
+@mixin font-smoothing( $value: aa ) {
+	@if $value == aa {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+
+	} @else if $value == subpixel-aa {
+		-webkit-font-smoothing: subpixel-antialiased;
+		-moz-osx-font-smoothing: auto;
+
+	} @else if $value == none {
+		-webkit-font-smoothing: none;
+		-moz-osx-font-smoothing: none;
+	}
+}

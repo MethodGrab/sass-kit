@@ -1,0 +1,10 @@
+//
+// Cross browser inline block
+// Only required for IE7-
+//
+@mixin inline-block( $alignment: middle ) {
+	vertical-align: $alignment;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}

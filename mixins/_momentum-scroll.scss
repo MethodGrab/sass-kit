@@ -1,0 +1,8 @@
+//
+// iOS Momentum Scrolling -- Much smoother!
+// @link  css-tricks.com/snippets/css/momentum-scrolling-on-ios-overflow-elements
+//
+@mixin momentum-scroll(  ) {
+	overflow-y: scroll; // has to be scroll, not auto
+	-webkit-overflow-scrolling: touch;
+}

@@ -1,0 +1,7 @@
+
+//
+// Adjust font rendering of light text on dark backgrounds in Chrome + OSX
+//
+@mixin antialiased(  ) {
+	-webkit-font-smoothing: antialiased;
+}

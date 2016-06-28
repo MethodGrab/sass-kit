@@ -1,0 +1,58 @@
+//
+// Asset Helpers
+// http://css-tricks.com/snippets/sass/simple-asset-helper-functions
+//
+
+
+//
+// Base path for assets (fonts, images...),
+// should not include trailing slash
+//
+// @type String
+//
+$asset-base-path: '..' !default;
+
+
+//
+// Asset URL builder
+// :: ( $type: string, $file: string, $raw: bool ) → string
+//
+// @examples
+// ```
+// .foo { background-image: asset( 'img', 'bar.png' ); }
+//   → .foo { background-image: url('../img/bar.png'); }
+//
+// $foo: asset( 'img', 'bar.png', true );
+//   → $foo: '../img/bar.png';
+// ```
+//
+@function asset( $type, $file, $raw: false ) {
+	$path: $asset-base-path + '/' + $type + '/' + $file;
+
+	@if $raw == false {
+		$path: url( '#{$path}' );
+	}
+
+	@return $path;
+}
+
+
+//
+// Image asset helper
+// :: ( $file: string, $raw: bool ) → url
+//
+// .foo { background-image: image( 'bar.png' ); }
+//   → .foo { background-image: url('../img/bar.png'); }
+//
+@function image( $file, $raw: false ) {
+	@return asset( 'img', $file, $raw );
+}
+
+
+//
+// Font asset helper
+// :: ( $file: string, $raw: bool ) → url
+//
+@function font( $file, $raw: false ) {
+	@return asset( 'fonts', $file, $raw );
+}

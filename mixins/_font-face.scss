@@ -1,0 +1,48 @@
+
+//
+// Font Face
+// Generate all the necessary font-face properties
+// @link https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
+//
+// @require  {function}  str-replace
+//
+// @param  {string}  $name    font name to be referenced in `font-family` declarations
+// @param  {string}  $path    path to the font files (excluding file extension)
+// @param  {string}  $weight  font weight
+// @param  {string}  $style   font style
+// @param  {list}    $exts    font types (file extensions) to use
+//
+// @example `@include font-face( 'NeuzeitGro', font('2A088F_4_0'), 400 )`
+//
+@mixin font-face( $name, $path, $weight: normal, $style: normal, $exts: eot woff2 woff ttf svg ) {
+	$src: null;
+
+	$extmods: (
+		eot: '?#iefix',
+		svg: '#' + str-replace( $name, ' ', '_' )
+	);
+
+	$formats: (
+		eot: 'embedded-opentype',
+		otf: 'opentype',
+		ttf: 'truetype'
+	);
+
+	@each $ext in $exts {
+		$extmod: if( map-has-key( $extmods, $ext ), $ext + map-get( $extmods, $ext ), $ext );
+		$format: if( map-has-key( $formats, $ext ), map-get( $formats, $ext ), $ext );
+		$src: append( $src, url( quote( $path + '.' + $extmod ) ) format( quote( $format ) ), comma );
+	}
+
+	@font-face {
+		font-family: quote( $name );
+		font-weight: $weight;
+		font-style: $style;
+
+		@if index( $exts, eot ) {
+			src: url( '#{$path}.eot' );
+		}
+
+		src: $src;
+	}
+}

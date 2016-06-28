@@ -1,0 +1,44 @@
+//
+// Color palette helper
+// http://erskinedesign.com/blog/friendlier-colour-names-sass-maps
+//
+// Usage:
+//
+// ```
+// $colors: (
+// 	black : #222,
+// 	green : (
+// 		base  : #2ecc40,
+// 		light : #a6e8ad,
+// 		dark  : #1d8a29,
+// 	),
+// );
+//
+// .t1 { color: color( black ); }
+// .t2 { color: color( green ); } // defaults to 'base'
+// .t3 { color: color( green, dark ); } // with a specific tone
+// ```
+//
+
+$colors: () !default;
+
+@function color( $color, $tone: 'base' ) {
+	$ret: map-get( $colors, $color );
+
+	@if map-has-key( $colors, $color ) == false {
+		@error( 'There is no color `#{$color}` in `$colors`' );
+		@return null;
+	}
+
+	// has tones
+	@if type-of( $ret ) == 'map' {
+		@if map-has-key( $ret, $tone ) == false {
+			@error( 'Color `#{$color}` has no tone `#{$tone}`' );
+			@return null;
+		}
+
+		$ret: map-get( $ret, $tone );
+	}
+
+	@return $ret;
+}

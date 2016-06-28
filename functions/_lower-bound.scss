@@ -1,0 +1,10 @@
+//
+// Lower Range
+// https://github.com/zurb/foundation/blob/master/scss/foundation/_functions.scss
+//
+@function lowerBound( $range ){
+	@if length( $range ) <= 0 {
+		@return 0;
+	}
+	@return nth( $range, 1 );
+}

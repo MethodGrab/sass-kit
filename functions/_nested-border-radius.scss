@@ -1,0 +1,22 @@
+//
+// Calculate correct nested border radii sizes
+// http://joshnh.com/tools/get-your-nested-border-radii-right.html
+// :: ( $outer-size: value, $padding: value ) → value
+//
+// @example
+//	```scss
+//	$size    : 80px;
+//	$padding : 20px;
+//
+//	.el {
+//		border-radius: $size;
+//		padding: $padding;
+//	}
+//		.el__inner {
+//			border-radius: nestedBorderRadius( $size, $padding );
+//		}
+//	```
+//
+@function nestedBorderRadius( $outer-size, $padding ) {
+	@return $outer-size - $padding;
+}

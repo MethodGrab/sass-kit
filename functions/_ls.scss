@@ -1,0 +1,9 @@
+//
+// Convert Photoshop "tracking" to CSS letter spacing
+// :: ( $val: int ) → value
+//
+// @example  `.kerned { letter-spacing: ls( 14 ); }`
+//
+@function ls( $val ) {
+	@return ( $val / 1000 ) * 1em;
+}

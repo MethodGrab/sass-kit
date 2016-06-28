@@ -1,0 +1,10 @@
+//
+// Upper Range
+// https://github.com/zurb/foundation/blob/master/scss/foundation/_functions.scss
+//
+@function upperBound( $range ) {
+	@if length( $range ) < 2 {
+		@return 999999999999;
+	}
+	@return nth( $range, 2 );
+}

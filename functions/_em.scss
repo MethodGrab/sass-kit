@@ -1,0 +1,10 @@
+//
+// Converts pixel values to ems
+// :: ( $px: value, $base: ?value ) → value
+//
+// @example `h1 { font-size: em( 24px ); }`
+//
+@function em( $px, $base: 16px ) {
+	@if unit( $px ) == 'em' { @return $px; } // dont convert if it's already ems
+	@return ( $px / $base ) * 1em;
+}

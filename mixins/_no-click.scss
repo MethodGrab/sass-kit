@@ -1,0 +1,8 @@
+//
+// Prevent an element from being clickable and
+// allow click to pass through to element below
+// @link caniuse.com/#feat=pointer-events
+//
+@mixin no-click(  ) {
+	pointer-events: none;
+}

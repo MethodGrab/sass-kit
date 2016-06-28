@@ -1,0 +1,58 @@
+//
+// Media Object
+// @link  stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code
+//
+// @version  default     =  Image -- Text
+// @version  .media--rev =  Text  -- Image
+//
+// @example
+// ``` html
+//	<div class="media">
+//		<a class="media__image" href="">
+//			<img src="" alt="" />
+//		</a>
+//		<div class="media__bd">
+//			Some text next to the image
+//		</div>
+//	</div>
+//	```
+//
+@mixin media-object( $spacing: false ) {
+
+	& {
+		@if ( $spacing ) { margin: $spacing; }
+
+		&__image {
+			float: left;
+			@if ( $spacing ) { margin-right: $spacing; }
+
+			img {
+				display: block;
+			}
+		}
+
+		// Clearfix
+		&,
+		&__bd {
+			overflow: hidden;
+			_overflow: visible;
+			zoom: 1;
+		}
+
+	}
+
+	//
+	// Modifier: Reverse
+	// Text on the left, image on the right
+	// @extends .media
+	//
+	&--rev &__image {
+		float: right;
+
+		@if ( $spacing ) {
+			margin-left: $spacing;
+			margin-right: 0;
+		}
+	}
+
+}
