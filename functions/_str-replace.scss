@@ -1,15 +1,15 @@
 //
 // String Replacement
-// :: ( $string: string, $search: string, $replace: string ) → string
+// :: ( $source: string, $find: string, $replace: string ) → string
 //
 // @example `$foo: strReplace( 'bar_baz', 'bar', 'qux' );`
 //
-@function strReplace( $string, $search, $replace: '' ) {
-	$index: str-index( $string, $search );
+@function strReplace( $source, $find, $replace: '' ) {
+	$index: str-index( $source, $find );
 
 	@if $index {
-		@return str-slice( $string, 1, $index - 1 ) + $replace + str-replace( str-slice( $string, $index + str-length( $search ) ), $search, $replace );
+		@return str-slice( $source, 1, $index - 1 ) + $replace + strReplace( str-slice( $source, $index + str-length( $find ) ), $find, $replace );
 	}
 
-	@return $string;
+	@return $source;
 }

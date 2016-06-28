@@ -2,11 +2,11 @@
 // Fluid Embed
 // Makes media embeds maintain a fixed aspect ratio but adapt to the width of their parent container
 //
-// @link  github.com/suitcss/flex-embed/blob/master/flex-embed.css
+// http://github.com/suitcss/flex-embed/blob/master/flex-embed.css
 //
 // @example
-// ``` html
-//	<div class="fluid-embed fluid-embed--16x9">
+// ```html
+//	<div class="fluid-embed fluid-embed--r16x9">
 //		<iframe class="fluid-embed__item" src="..."></iframe>
 //	</div>
 // ```

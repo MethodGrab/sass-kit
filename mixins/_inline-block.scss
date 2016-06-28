@@ -1,6 +1,7 @@
 //
 // Cross browser inline block
 // Only required for IE7-
+// :: ( $alignment: value )
 //
 @mixin inline-block( $alignment: middle ) {
 	vertical-align: $alignment;

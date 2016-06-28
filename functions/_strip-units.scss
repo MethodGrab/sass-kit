@@ -1,7 +1,8 @@
 //
 // Strip units
 // https://github.com/sass/sass/issues/533#issuecomment-11675408
+// :: ( $val: value ) → number
 //
-@function stripUnits( $number ) {
-	@return $number / ( $number * 0 + 1 );
+@function stripUnits( $val ) {
+	@return $val / ( $val * 0 + 1 );
 }

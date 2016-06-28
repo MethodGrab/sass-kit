@@ -1,8 +1,7 @@
 //
 // Text Overflow Ellipsis
 // Note: This requires the element to be block or inline-block.
-// @link  stackoverflow.com/a/9931634
-// @example  `.dot-dot-dot { @include text-ellipsis; }`
+// http://stackoverflow.com/a/9931634
 //
 @mixin text-ellipsis(  ) {
 	overflow: hidden;
