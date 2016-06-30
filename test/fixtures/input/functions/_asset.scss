@@ -1,0 +1,6 @@
+@import 'functions/index';
+
+.t001 { background: asset( 'img', 'r001.jpg' ); }
+.t002 { background: image( 'r002.jpg' ); }
+.t003 { background: image( 'r003.jpg', true ); }
+.t004 { content: font( 'r004.ttf' ); }
