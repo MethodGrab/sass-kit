@@ -2,15 +2,15 @@
 // $ Functions
 // ==========================================================================
 
-@include 'parse-int';
-@include 'str-replace';
-@include 'strip-units';
-@include 'lower-bound';
-@include 'upper-bound';
+@import 'parse-int';
+@import 'str-replace';
+@import 'strip-units';
+@import 'lower-bound';
+@import 'upper-bound';
 
-@include 'em';
+@import 'em';
 
-@include 'asset';
-@include 'color';
-@include 'ls';
-@include 'nested-border-radius';
+@import 'asset';
+@import 'color';
+@import 'ls';
+@import 'nested-border-radius';
