@@ -1,5 +1,5 @@
 {
-  "name": "sass-helpers",
+  "name": "@methodgrab/sass-helpers",
   "version": "0.1.0",
   "description": "A collection of Sass functions & mixins",
   "license": "MIT",
