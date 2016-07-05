@@ -1,10 +1,17 @@
-import fs   from 'fs';
-import path from 'path';
-import sass from 'node-sass';
+import _fs     from 'fs';
+import path    from 'path';
+import Promise from 'bluebird';
+import sass    from 'node-sass';
+
+const fs = Promise.promisifyAll( _fs );
 
 
-export const read = ( _path ) => fs.readFileSync( _path, 'utf-8' );
+// :: ( _path: string ) → string
+// Read a file
+export const read = ( _path ) => fs.readFileAsync( _path, 'utf-8' );
 
+// :: ( _path: string, ... ) → string
+// Get the path to a fixture
 export const fixture = ( ...args ) => path.join( __dirname, '../fixtures', ...args );
 
 

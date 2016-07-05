@@ -7,33 +7,41 @@ import { compile, read, fixture } from './helpers/helpers';
 const fs = Promise.promisifyAll( _fs );
 
 
+// :: ( type: string ) → array
+// Get a list of files in a directory
 const getFiles = async ( type ) => {
 	const testsPath = path.join( __dirname, '../', type );
-	return await fs.readdirAsync( testsPath )
-		.then(( _files ) => {
 
-			_files = _files
-				// remove ext
-				.map( f => f.replace( path.extname( f ), '' ) )
+	let files = await fs.readdirAsync( testsPath );
 
-				// remove leading `_`
-				.map( f => f.substring( 1 ) )
+	files = files
+		// remove ext
+		.map( f => f.replace( path.extname( f ), '' ) )
 
-				// filter indexes
-				.filter( f => f !== 'index' );
+		// remove leading `_`
+		.map( f => f.substring( 1 ) )
 
-			return _files;
-		});
+		// filter indexes
+		.filter( f => f !== 'index' );
+
+	return files;
 
 };
 
 
+// :: ( type: string ) → function
+// Create an AVA test macro function thats asserts
+// 1) No warnings are thrown
+// 2) The compiled CSS matches the expected CSS
 const macro = ( type ) => {
+
+	// :: ( t: AVA instance, file: string ) → null
+	// The actual AVA macro function
 	const _macro = async ( t, file ) => {
 		// console.log( `Start '${file}.scss'...` );
 
 		const src      = fixture( `/input/${type}/_${file}.scss` );
-		const expected = read( fixture( `/expected/${type}/${file}.css` ) );
+		const expected = await read( fixture( `/expected/${type}/${file}.css` ) );
 
 		// console.log( `Compiling '${file}.scss'...` );
 
@@ -50,9 +58,12 @@ const macro = ( type ) => {
 	_macro.title = ( providedTitle, file ) => `${providedTitle}: ${file}`;
 
 	return _macro;
+
 };
 
 
+// :: (  ) → null
+// Programatically create the tests
 const init = async () => {
 	const functionFiles = await getFiles( 'functions' );
 	const functionMacro = macro( 'functions' );
