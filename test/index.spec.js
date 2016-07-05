@@ -36,9 +36,15 @@ const macro = async ( t, file ) => {
 	const src      = fixture( `/input/functions/_${file}.scss` );
 	const expected = read( fixture( `/expected/functions/${file}.css` ) );
 
-	// console.log( `Testing '${file}.scss'...` );
+	// console.log( `Compiling '${file}.scss'...` );
+
 	const res = await compile( src );
+
+	// console.log( `Compiled output of '${file}.scss':`, `\n---\n${res.css}\n---\n` );
+
+	t.is( res.warnings.length, 0 );
 	t.is( res.css, expected );
+
 	// console.log( `Done '${file}.scss'...\n\n` );
 };
 

@@ -1,0 +1,5 @@
+@import 'functions/index';
+
+.t001 { content: stripUnits( 100px ); }
+.t002 { content: stripUnits( 200em ); }
+.t003 { content: stripUnits( 300vh ); }
