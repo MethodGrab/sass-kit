@@ -13,11 +13,17 @@ const getFiles = async () => {
 	const testsPath = path.join( __dirname, '../functions' );
 	return await fs.readdirAsync( testsPath )
 		.then(( _files ) => {
-			// remove ext
-			_files = _files.map( f => f.replace( path.extname( f ), '' ) );
 
-			// remove leading `_`
-			_files = _files.map( f => f.substring( 1 ) );
+			_files = _files
+				// remove ext
+				.map( f => f.replace( path.extname( f ), '' ) )
+
+				// remove leading `_`
+				.map( f => f.substring( 1 ) )
+
+				// filter indexes
+				.filter( f => f !== 'index' );
+
 			return _files;
 		});
 
@@ -41,6 +47,7 @@ macro.title = ( providedTitle, file ) => `${providedTitle}: ${file}`;
 
 const init = async () => {
 	testFiles = await getFiles();
+
 	testFiles.forEach( ( file ) => {
 		test( 'function returns an expected value', macro, file );
 	});
