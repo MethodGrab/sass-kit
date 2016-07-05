@@ -6,11 +6,9 @@ import { compile, read, fixture } from './helpers/helpers';
 
 const fs = Promise.promisifyAll( _fs );
 
-let testFiles;
 
-
-const getFiles = async () => {
-	const testsPath = path.join( __dirname, '../functions' );
+const getFiles = async ( type ) => {
+	const testsPath = path.join( __dirname, '../', type );
 	return await fs.readdirAsync( testsPath )
 		.then(( _files ) => {
 
@@ -30,32 +28,37 @@ const getFiles = async () => {
 };
 
 
-const macro = async ( t, file ) => {
-	// console.log( `Start '${file}.scss'...` );
+const macro = ( type ) => {
+	const _macro = async ( t, file ) => {
+		// console.log( `Start '${file}.scss'...` );
 
-	const src      = fixture( `/input/functions/_${file}.scss` );
-	const expected = read( fixture( `/expected/functions/${file}.css` ) );
+		const src      = fixture( `/input/${type}/_${file}.scss` );
+		const expected = read( fixture( `/expected/${type}/${file}.css` ) );
 
-	// console.log( `Compiling '${file}.scss'...` );
+		// console.log( `Compiling '${file}.scss'...` );
 
-	const res = await compile( src );
+		const res = await compile( src );
 
-	// console.log( `Compiled output of '${file}.scss':`, `\n---\n${res.css}\n---\n` );
+		// console.log( `Compiled output of '${file}.scss':`, `\n---\n${res.css}\n---\n` );
 
-	t.is( res.warnings.length, 0 );
-	t.is( res.css, expected );
+		t.is( res.warnings.length, 0 );
+		t.is( res.css, expected );
 
-	// console.log( `Done '${file}.scss'...\n\n` );
+		// console.log( `Done '${file}.scss'...\n\n` );
+	};
+
+	_macro.title = ( providedTitle, file ) => `${providedTitle}: ${file}`;
+
+	return _macro;
 };
-
-macro.title = ( providedTitle, file ) => `${providedTitle}: ${file}`;
 
 
 const init = async () => {
-	testFiles = await getFiles();
+	const functionFiles = await getFiles( 'functions' );
+	const functionMacro = macro( 'functions' );
 
-	testFiles.forEach( ( file ) => {
-		test( 'function returns an expected value', macro, file );
+	functionFiles.forEach( ( file ) => {
+		test( 'function returns an expected value', functionMacro, file );
 	});
 };
 
