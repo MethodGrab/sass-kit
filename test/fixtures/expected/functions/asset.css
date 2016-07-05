@@ -1,0 +1,7 @@
+.t001 { background: url("../img/r001.jpg"); }
+
+.t002 { background: url("../img/r002.jpg"); }
+
+.t003 { background: "../img/r003.jpg"; }
+
+.t004 { content: url("../fonts/r004.ttf"); }

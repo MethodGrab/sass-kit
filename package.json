@@ -12,7 +12,24 @@
     "functions"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
-  "main": "_index.scss"
+  "main": "_index.scss",
+  "devDependencies": {
+    "@methodgrab/eslint-config-standard": "^0.8.0",
+    "ava": "^0.15.2",
+    "babel-eslint": "^6.1.0",
+    "bluebird": "^3.4.1",
+    "node-sass": "^3.8.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2"
+    ]
+  },
+  "ava": {
+    "require": "babel-register",
+    "babel": "inherit"
+  }
 }

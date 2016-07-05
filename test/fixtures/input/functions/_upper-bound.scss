@@ -1,0 +1,4 @@
+@import 'functions/index';
+
+.t001 { content: upperBound( ( 1, 500 ) ); }
+.t002 { content: upperBound( ( 250, 55 ) ); }

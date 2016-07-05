@@ -1,0 +1,14 @@
+@import 'functions/index';
+
+$colors: (
+	my-black : #222,
+	my-green : (
+		base  : #2ecc40,
+		light : #a6e8ad,
+		dark  : #1d8a29,
+	),
+);
+
+.t001 { color: color( my-black ); }
+.t002 { color: color( my-green ); }
+.t003 { color: color( my-green, dark ); }

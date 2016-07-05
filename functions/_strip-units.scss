@@ -6,3 +6,11 @@
 @function stripUnits( $val ) {
 	@return $val / ( $val * 0 + 1 );
 }
+
+
+// DEPRECATED in favor of `stripUnits` which is more descriptive
+// of what this function actually does
+@function parseInt( $val ) {
+	@warn '`parseInt` is deprecated, use `stripUnits` instead';
+	@return stripUnits( $val );
+}

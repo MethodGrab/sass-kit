@@ -1,0 +1,13 @@
+@import 'functions/index';
+
+$rad: 20px;
+$pad: 10px;
+
+.t001 {
+	padding: $pad;
+	border-radius: $rad;
+
+	&__c {
+		border-radius: nestedBorderRadius( $rad, $pad );
+	}
+}

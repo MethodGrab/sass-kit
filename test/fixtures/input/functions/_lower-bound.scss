@@ -1,0 +1,4 @@
+@import 'functions/index';
+
+.t001 { content: lowerBound( ( 1, 500 ) ); }
+.t002 { content: lowerBound( ( 250, 55 ) ); }
