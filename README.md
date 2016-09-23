@@ -143,3 +143,148 @@ Media object pattern
 
 #### `fluid-embed`
 Makes media embeds maintain a fixed aspect ratio but adapt to the width of their parent container
+
+
+## Responsive
+Responsive / media query helpers.
+
+### Usage
+
+#### Basic
+An `em` Sass function is required to convert `px` values to `ems`. You can provide one or import the included `functions/em` file as well:
+
+```scss
+@import 'node_modules/sass-kit/functions/em';
+@import 'node_modules/sass-kit/mixins/responsive';
+
+p {
+	color: black;
+
+	@include below( 320px ) {
+		color: red;
+	}
+
+	@include between( 480px, 500px ) {
+		color: cyan;
+	}
+
+	@include above( 720px ) {
+		color: orange;
+	}
+
+	@include landscape() {
+		color: green;
+	}
+
+	@include portrait() {
+		color: blue;
+	}
+}
+```
+
+
+#### Without conversion
+Don't convert the media queries to ems:
+
+```scss
+@import 'node_modules/sass-kit/mixins/responsive';
+
+p {
+	color: black;
+
+	@include below( 320px, $convert: false ) {
+		color: red;
+	}
+
+	@include between( 480px, 500px, $convert: false ) {
+		color: cyan;
+	}
+
+	@include above( 720px, $convert: false ) {
+		color: blue;
+	}
+}
+```
+
+
+#### Dimensions other than width
+```scss
+@import 'node_modules/sass-kit/functions/em';
+@import 'node_modules/sass-kit/mixins/responsive';
+
+p {
+	@include above( 720px, height ) {
+		color: cyan;
+	}
+}
+```
+
+
+#### Keywords
+You can also use predefined keywords, to do so create a map called `$breakpoints`:
+
+```scss
+@import 'node_modules/sass-kit/functions/em';
+@import 'node_modules/sass-kit/mixins/responsive';
+
+// these are the predefined keywords which you can overwrite
+$breakpoints: (
+	small  : 320px,
+	medium : 640px,
+	large  : 1024px,
+	xlarge : 1440px,
+	xxlarge: 1920px,
+);
+
+p {
+	@include above( medium ) {
+		color: cyan;
+	}
+}
+```
+
+
+### API
+The following mixins are available:
+
+
+#### `break( $type: string, $from: value, $to: ?value, $dimension: ?string, $convert: bool )`
+The base mixin.
+
+**$type**  
+Breakpoint type, one of `'above'`, `'below'`, `'between'`.
+
+**$from**  
+Breakpoint start.
+
+**$to**  
+Default: `false`  
+Breakpoint end, only required for `$type: 'between'`.
+
+**$dimension**  
+Default: `'width'`  
+Breakpoint dimension, one of `'width'`, `'height'`.
+
+**$convert**  
+Default: `true`  
+Convert px based `$from` & `$to` values to `ems`.
+
+
+#### `below( $size: value, $dimension: ?string, $convert: ?bool )`
+Include styles **below** `$size`.
+
+
+#### `above( $size: value, $dimension: ?string, $convert: ?bool )`
+Include styles **above** `$size`.
+
+
+#### `between( $from: value, $to: value, $dimension: ?string, $convert: ?bool )`
+Include styles **between** `$from` & `$to`.
+
+
+#### `landscape()`
+Include styles in landscape orientation.
+
+
+#### `portrait()`
+Include styles in portrait orientation.
