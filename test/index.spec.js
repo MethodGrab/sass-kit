@@ -27,8 +27,8 @@ const macro = ( type ) => {
 
 		// console.log( `Compiled output of '${file}.scss':`, `\n---\n${res.css}\n---\n` );
 
-		t.is( res.warnings.length, 0 );
-		t.is( res.css, expected );
+		t.true( res.warnings.length === 0 );
+		t.true( res.css === expected );
 
 		// console.log( `Done '${file}.scss'...\n\n` );
 	};
