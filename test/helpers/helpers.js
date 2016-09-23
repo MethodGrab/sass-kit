@@ -18,8 +18,8 @@ export const fixture = ( ...args ) => path.join( __dirname, '../fixtures', ...ar
 
 // :: ( type: string ) → array
 // Get a list of files in a directory
-const getFiles = async ( type ) => {
-	const testsPath = path.join( __dirname, '../', type );
+export const getFiles = async ( type ) => {
+	const testsPath = path.join( __dirname, '../../', type );
 
 	let files = await fs.readdirAsync( testsPath );
 
