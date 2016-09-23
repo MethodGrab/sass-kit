@@ -1,0 +1,10 @@
+//
+// Converts pixel values to rem
+// :: ( $px: value, $base: ?value ) → value
+//
+// @example `h1 { font-size: rem( 24px ); }`
+//
+@function rem( $px, $base: 16px ) {
+	@if unit( $px ) == 'rem' { @return $px; } // dont convert if it's already rem
+	@return ( $px / $base ) * 1rem;
+}
