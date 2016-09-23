@@ -2,7 +2,7 @@
   "name": "sass-kit",
   "version": "0.0.0",
   "description": "A collection of Sass functions & mixins",
-  "license": "MIT",
+  "license": "ISC",
   "repository": "MethodGrab/sass-kit",
   "author": "MethodGrab",
   "keywords": [
