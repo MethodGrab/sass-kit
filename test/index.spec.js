@@ -8,76 +8,64 @@ const fs = Promise.promisifyAll( _fs );
 const debug = require( 'debug' )( 'sass-kit:tests' );
 
 
-// :: ( type: string ) → function
-// Create an AVA test macro function thats asserts
-// 1) No warnings are thrown
-// 2) The compiled CSS matches the expected CSS
-const individualFileMacro = ( type ) => {
+// :: ( t: AVA instance, input: string, expected: string ) → null
+// Macro to check the compiled contents matches an expected value
+const compiledMatchesExpectedMacro = async ( t, input, expected ) => {
+	debug( 'compiledMatchesExpectedMacro: start', { input, expected } );
 
-	// :: ( t: AVA instance, file: string ) → null
-	// The actual AVA macro function
-	const _individualFileMacro = async ( t, file ) => {
-		debug( 'individualFileMacro: start', { file } );
+	const src              = input;
+	const expectedContents = await read( expected );
 
-		const src      = fixture( `/input/${type}/_${file}.scss` );
-		const expected = await read( fixture( `/expected/${type}/${file}.css` ) );
+	const res = await compile( src );
 
-		const res = await compile( src );
+	debug( 'compiledMatchesExpectedMacro: results', { input, expected, res } );
 
-		debug( 'individualFileMacro: results', { file, res } );
-
-		t.true( res.warnings.length === 0 );
-		t.true( res.css === expected );
-	};
-
-	_individualFileMacro.title = ( providedTitle, file ) => `${providedTitle}: ${file}`;
-
-	return _individualFileMacro;
-
+	t.true( res.css === expectedContents );
 };
 
+compiledMatchesExpectedMacro.title = ( providedTitle, input ) => `compiled matches expected: ${providedTitle}`;
 
-// :: ( t: AVA instance, file: string ) → null
+
+// :: ( t: AVA instance, input: string, expected: string ) → null
 // Macro to check a file compiles without errors or warnings
 const compilesSuccessfullyMacro = async ( t, input, expected ) => {
+	debug( 'compilesSuccessfullyMacro: start', { input, expected } );
+
 	let res;
 	let errors = false;
 
-	const src = path.join( __dirname, '../', input );
-
-	debug( 'compilesSuccessfullyMacro: start', { input, expected, src } );
+	const src = input;
 
 	try {
 		res = await compile( src );
 	} catch ( err ) {
 		errors = err.message;
-		debug( 'compilesSuccessfullyMacro: errors', { err } );
+		debug( 'compilesSuccessfullyMacro: errors', { input, expected, err } );
 	}
 
-	debug( 'compilesSuccessfullyMacro: results', { input, res, errors } );
+	debug( 'compilesSuccessfullyMacro: results', { input, expected, res, errors } );
 
 	t.true( errors === false );
 	t.true( res.warnings.length === 0 );
 };
 
-compilesSuccessfullyMacro.title = ( providedTitle, input ) => `compiles without errors or warnings: ${input}`;
+compilesSuccessfullyMacro.title = ( providedTitle, input ) => `compiles without errors or warnings: ${providedTitle}`;
 
 
 // :: (  ) → null
 // Programatically create the tests
 const runProgramaticTests = async () => {
 	const functionFiles = await getFiles( 'functions' );
-	const functionMacro = individualFileMacro( 'functions' );
 
 	functionFiles.forEach( ( file ) => {
-		test( 'function returns an expected value', functionMacro, file );
+		test( `function '${file}'`, [ compilesSuccessfullyMacro, compiledMatchesExpectedMacro ], fixture( `/input/functions/_${file}.scss` ), fixture( `/expected/functions/${file}.css` ) );
 	});
 };
 
 runProgramaticTests();
 
 
-test( 'compiles with zero output: _index.scss', async t => {
+test( `compiles with zero output: '_index.scss'`, async t => {
 	const src = path.join( __dirname, '../_index.scss' );
 	const res = await compile( src );
 
@@ -85,4 +73,4 @@ test( 'compiles with zero output: _index.scss', async t => {
 });
 
 
-test( compilesSuccessfullyMacro, '_index.scss' );
+test( `'_index.scss'`, compilesSuccessfullyMacro, path.join( __dirname, '../_index.scss' ) );

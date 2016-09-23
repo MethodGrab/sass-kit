@@ -7,6 +7,7 @@ module.exports = {
 	parser: 'babel-eslint',
 
 	rules : {
+		'quotes'                 : [ 'error', 'single', { allowTemplateLiterals: true } ],
 		'no-param-reassign'      : 'off',
 
 		// https://github.com/eslint/eslint/issues/7012
