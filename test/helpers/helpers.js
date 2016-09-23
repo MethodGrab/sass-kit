@@ -45,7 +45,7 @@ export const compile = ( str, { file = true } = {} ) => {
 		const warnings = [];
 
 		const opts = {
-			outputStyle : 'compact',
+			outputStyle : 'nested',
 
 			includePaths : [
 				path.join( __dirname, '../..' ),
