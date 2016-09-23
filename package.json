@@ -9,7 +9,8 @@
     "sass",
     "scss",
     "mixins",
-    "functions"
+    "functions",
+    "helpers"
   ],
   "scripts": {
     "test": "ava"
