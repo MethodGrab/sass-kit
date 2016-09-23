@@ -19,7 +19,7 @@
   },
   "main": "_index.scss",
   "devDependencies": {
-    "@methodgrab/eslint-config-standard": "^0.8.0",
+    "@methodgrab/eslint-config-standard": "^0.9.0",
     "ava": "^0.15.2",
     "babel-eslint": "^6.1.0",
     "babel-polyfill": "^6.13.0",

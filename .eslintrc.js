@@ -1,12 +1,16 @@
 module.exports = {
 	extends : [
 		'@methodgrab/standard',
-		'@methodgrab/standard/es2015',
+		'@methodgrab/standard/esnext',
 	],
 
 	parser: 'babel-eslint',
 
 	rules : {
-		'no-param-reassign': 0,
+		'no-param-reassign'      : 'off',
+
+		// https://github.com/eslint/eslint/issues/7012
+		// https://github.com/eslint/eslint/issues/6274
+		'generator-star-spacing' : 'off',
 	},
 };
