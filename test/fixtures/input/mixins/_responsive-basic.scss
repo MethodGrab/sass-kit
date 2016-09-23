@@ -1,0 +1,69 @@
+@import 'functions/_em.scss';
+@import 'mixins/_responsive.scss';
+
+
+body {
+
+	// #break //
+
+	@include break( 'above', 1000px, $convert: true ){
+		content: 'break(), above, 62.5em';
+	}
+
+	@include break( 'above', 1000px, $convert: false ){
+		content: 'break(), above, 1000px';
+	}
+
+	@include break( 'below', 1000px, $convert: false ){
+		content: 'break(), below, 1000px';
+	}
+
+	@include break( 'between', 1000px, 2000px, $convert: false ){
+		content: 'break(), between, 1000px .. 2000px';
+	}
+
+	// #break with predefined //
+
+	@include break( 'above', large, $convert: false ){
+		content: 'break(), above, "large"';
+	}
+
+	@include break( 'below', large, $convert: false ){
+		content: 'break(), below, "large"';
+	}
+
+	@include break( 'between', medium, large, $convert: false ){
+		content: 'break(), between, "medium" .. "large"';
+	}
+
+	// #above //
+
+	@include above( 1000px, $convert: false ) {
+		content: 'above(), 1000px';
+	}
+
+	// #below //
+
+	@include below( 1000px, $convert: false ) {
+		content: 'below(), 1000px';
+	}
+
+	// #between //
+
+	@include between( 1000px, 2000px, $convert: false ) {
+		content: 'between(), 1000px .. 2000px';
+	}
+
+	// #landscape //
+
+	@include landscape {
+		content: 'landscape()';
+	}
+
+	// #portrait //
+
+	@include portrait {
+		content: 'portrait()';
+	}
+
+}

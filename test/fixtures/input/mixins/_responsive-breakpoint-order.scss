@@ -1,0 +1,12 @@
+@import 'functions/_em.scss';
+@import 'mixins/_responsive.scss';
+
+
+body {
+
+	// this should @warn about $from > $to
+	@include break( 'between', large, medium, $convert: false ){
+		content: 'break(), between, "large" .. "medium"';
+	}
+
+}

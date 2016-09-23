@@ -1,0 +1,153 @@
+// ==========================================================================
+// $ Responsive / Media Queries
+// ==========================================================================
+
+
+// Redefine these as needed
+$breakpoints: (
+	small  : 320px,
+	medium : 640px,
+	large  : 1024px,
+	xlarge : 1440px,
+	xxlarge: 1920px,
+) !default;
+
+
+$screen: 'only screen' !default;
+
+
+
+//
+// Media Query: Breakpoint
+// $from & $to can be values in px or predefined values from `$breakpoints`
+//
+// :: ( $type: string, $from: value, $to: ?value, $dimension: ?string, $convert: ?bool )
+//
+// @require  {function}  em
+//
+// @param  {string}     $type       'above' | 'below' | 'between'
+// @param  {value}      $from       Breakpoint start
+// @param  {value}      $to         Breakpoint end
+// @param  {string}     $dimension  'width' | 'height'
+// @param  {bool}       $convert    Convert to ems
+//
+// @examples:
+// `@include break( 'below', 640px ) { // small screens }`
+// `@include break( 'below', medium ) { // small screens }`
+// `@include break( 'below', medium, $convert: false ) { // small screens, using px }`
+// `@include break( 'below', 1000px, false, 'height' ) { // viewport less then 1000px tall  }`
+// `@include break( 'between', 640px, 720px ) { // above 640px but below 720px wide }`
+//
+@mixin break( $type, $from, $to: false, $dimension: false, $convert: true ) {
+
+	// predefined breakpoints
+	@if map-has-key( $breakpoints, $from ) {
+		$from: map-get( $breakpoints, $from );
+	}
+
+	@if map-has-key( $breakpoints, $to ) {
+		$to: map-get( $breakpoints, $to );
+	}
+
+	$dimension: if( $dimension, $dimension, 'width' );
+
+	$em-exists: if( function-exists( em ), true, false );
+
+	@if $em-exists == false and $convert {
+		@warn( '[responsive.scss] Cannot convert to ems, missing `em` function.' );
+	}
+
+	// convert to ems
+	$from : if( $em-exists and $convert and $from, em( $from ), $from );
+	$to   : if( $em-exists and $convert and $to, em( $to ), $to );
+
+	// warn about invalid arguments
+	@if $from and $to and $from >= $to {
+		@warn '[responsive.scss] The start breakpoint (#{$from}) is larger than the end breakpoint (#{$to}). Are these the right way round?';
+	}
+
+	// create media query string
+	$types: (
+		'above'   : '(min-#{$dimension}: #{$from})',
+		'below'   : '(max-#{$dimension}: #{$from})',
+		'between' : '(min-#{$dimension}: #{$from}) and (max-#{$dimension}: #{$to})',
+	);
+
+	$mq: map-get( $types, $type );
+
+	// output media query
+	@media #{$screen} and #{$mq} {
+		@content;
+	}
+
+}
+
+
+
+//
+// Media Query Helper: Breakpoint below $size
+//
+// @example
+// `@include below(640px) { // medium screens and below }`
+//
+@mixin below( $size, $dimension: false, $convert: true ) {
+	@include break( 'below', $size, $dimension: $dimension, $convert: $convert ) {
+		@content;
+	};
+}
+
+
+
+//
+// Media Query Helper: Breakpoint above $size
+//
+// @example
+// `@include above(640px) { // medium screens and above }`
+//
+@mixin above( $size, $dimension: false, $convert: true ) {
+	@include break( 'above', $size, $dimension: $dimension, $convert: $convert ) {
+		@content;
+	}
+}
+
+
+
+//
+// Media Query Helper: Breakpoint between $from and $to
+//
+// @example
+// `@include between(640px, 720px) { // above 640px but below 720px }`
+//
+@mixin between( $from, $to, $dimension: false, $convert: true ) {
+	@include break( 'between', $from, $to, $dimension: $dimension, $convert: $convert ) {
+		@content;
+	};
+}
+
+
+
+//
+// Media Query Helper: Landscape orientation
+//
+// @example
+// `@include landscape { // landscape orientation only }`
+//
+@mixin landscape {
+	@media #{$screen} and (orientation: landscape) {
+		@content;
+	}
+}
+
+
+
+//
+// Media Query Helper: Portrait orientation
+//
+// @example
+// `@include portrait { // portrait orientation only }`
+//
+@mixin portrait {
+	@media #{$screen} and (orientation: portrait) {
+		@content;
+	}
+}
