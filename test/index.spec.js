@@ -5,6 +5,7 @@ import test    from 'ava';
 import { compile, read, fixture, getFiles } from './helpers/helpers';
 
 const fs = Promise.promisifyAll( _fs );
+const debug = require( 'debug' )( 'sass-kit:tests' );
 
 
 // :: ( type: string ) → function
@@ -16,21 +17,17 @@ const individualFileMacro = ( type ) => {
 	// :: ( t: AVA instance, file: string ) → null
 	// The actual AVA macro function
 	const _individualFileMacro = async ( t, file ) => {
-		// console.log( `Start '${file}.scss'...` );
+		debug( 'individualFileMacro: start', { file } );
 
 		const src      = fixture( `/input/${type}/_${file}.scss` );
 		const expected = await read( fixture( `/expected/${type}/${file}.css` ) );
 
-		// console.log( `Compiling '${file}.scss'...` );
-
 		const res = await compile( src );
 
-		// console.log( `Compiled output of '${file}.scss':`, `\n---\n${res.css}\n---\n` );
+		debug( 'individualFileMacro: results', { file, res } );
 
 		t.true( res.warnings.length === 0 );
 		t.true( res.css === expected );
-
-		// console.log( `Done '${file}.scss'...\n\n` );
 	};
 
 	_individualFileMacro.title = ( providedTitle, file ) => `${providedTitle}: ${file}`;
@@ -48,11 +45,16 @@ const compilesSuccessfullyMacro = async ( t, input, expected ) => {
 
 	const src = path.join( __dirname, '../', input );
 
+	debug( 'compilesSuccessfullyMacro: start', { input, expected, src } );
+
 	try {
 		res = await compile( src );
 	} catch ( err ) {
 		errors = err.message;
+		debug( 'compilesSuccessfullyMacro: errors', { err } );
 	}
+
+	debug( 'compilesSuccessfullyMacro: results', { input, res, errors } );
 
 	t.true( errors === false );
 	t.true( res.warnings.length === 0 );
