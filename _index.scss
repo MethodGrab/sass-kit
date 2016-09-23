@@ -2,8 +2,8 @@
 // $ Sass Helpers
 // ==========================================================================
 
-@include 'functions/index';
-@include 'mixins/index';
+@import 'functions/index';
+@import 'mixins/index';
 
 // Optional object orientated classes
-// @include 'util-classes';
+// @import 'util-classes';
