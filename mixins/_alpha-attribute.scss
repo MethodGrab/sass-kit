@@ -3,9 +3,7 @@
 // Generates a fallback for alpha colors based on the background & foreground colors
 // http://thesassway.com/intermediate/mixins-for-semi-transparent-colors
 //
-// @param  {string}  $attribute   attribute name
-// @param  {string}  $color       foreground color
-// @param  {string}  $background  background color
+// :: ( $attribute: value, $color: value, $background: value )
 //
 // @example `@include alpha-attribute( 'background-color', rgba(black, 0.5), white );`
 //

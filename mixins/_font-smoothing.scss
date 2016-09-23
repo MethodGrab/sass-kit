@@ -1,6 +1,6 @@
 //
+// :: ( $value: ?string )
 // Text antialiasing
-// @param  {string}  $value  antialiased (default), subpixel-antialiased, none
 //
 @mixin font-smoothing( $value: aa ) {
 	@if $value == aa {

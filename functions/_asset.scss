@@ -15,7 +15,7 @@ $asset-base-path: '..' !default;
 
 //
 // Asset URL builder
-// :: ( $type: string, $file: string, $raw: bool ) → string
+// :: ( $type: string, $file: string, $raw: ?bool ) → string
 //
 // @examples
 // ```
@@ -39,7 +39,7 @@ $asset-base-path: '..' !default;
 
 //
 // Image asset helper
-// :: ( $file: string, $raw: bool ) → url
+// :: ( $file: string, $raw: ?bool ) → url|string
 //
 // .foo { background-image: image( 'bar.png' ); }
 //   → .foo { background-image: url('../img/bar.png'); }
@@ -51,7 +51,7 @@ $asset-base-path: '..' !default;
 
 //
 // Font asset helper
-// :: ( $file: string, $raw: bool ) → url
+// :: ( $file: string, $raw: ?bool ) → url|string
 //
 @function font( $file, $raw: false ) {
 	@return asset( 'fonts', $file, $raw );

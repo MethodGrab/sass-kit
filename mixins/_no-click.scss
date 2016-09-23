@@ -1,8 +1,8 @@
 //
 // Prevent an element from being clickable and
-// allow click to pass through to element below
+// allow the click to pass through to the element below
 // http://caniuse.com/#feat=pointer-events
 //
-@mixin no-click(  ) {
+@mixin no-click {
 	pointer-events: none;
 }

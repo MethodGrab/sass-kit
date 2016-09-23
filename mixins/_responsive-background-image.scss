@@ -1,9 +1,10 @@
 //
 // Responsive background images that maintain their aspect ratio
+// :: ( $width: value, $height: value, $url: ?value, $size: ?value )
 //
-// @param  {string}  $url     image url
 // @param  {number}  $width   width of image file
 // @param  {number}  $height  height of image file
+// @param  {string}  $url     image url
 // @param  {number}  $size    % width of the parent the image should occupy
 //
 @mixin responsive-background-image( $width, $height, $url: false, $size: 100% ) {
