@@ -2,13 +2,13 @@
 // $ Helper Classes
 // ==========================================================================
 
-.u-cf                         { @include cf; }
-.u-ir                         { @include ir; }
-.u-font-crush                 { @include font-crush; }
-.u-hidden                     { @include hidden; }
-.u-visually-hidden            { @include visually-hidden; }
-.u-visually-hidden--focusable { @include visually-hidden( $focusable: true ); }
-.u-invisible                  { @include invisible; }
+.u-cf                        { @include cf; }
+.u-ir                        { @include ir; }
+.u-font-crush                { @include font-crush; }
+.u-hidden                    { @include hidden; }
+.u-visually-hidden           { @include visually-hidden; }
+.u-visually-hidden-focusable { @include visually-hidden( $focusable: true ); }
+.u-invisible                 { @include invisible; }
 
-.o-fluid-embed                { @include fluid-embed; }
-.o-media                      { @include media-object; }
+.o-fluid-embed               { @include fluid-embed; }
+.o-media                     { @include media-object; }
