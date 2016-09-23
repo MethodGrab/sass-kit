@@ -10,9 +10,32 @@ const fs = Promise.promisifyAll( _fs );
 // Read a file
 export const read = ( _path ) => fs.readFileAsync( _path, 'utf-8' );
 
+
 // :: ( _path: string, ... ) → string
 // Get the path to a fixture
 export const fixture = ( ...args ) => path.join( __dirname, '../fixtures', ...args );
+
+
+// :: ( type: string ) → array
+// Get a list of files in a directory
+const getFiles = async ( type ) => {
+	const testsPath = path.join( __dirname, '../', type );
+
+	let files = await fs.readdirAsync( testsPath );
+
+	files = files
+		// remove ext
+		.map( f => f.replace( path.extname( f ), '' ) )
+
+		// remove leading `_`
+		.map( f => f.substring( 1 ) )
+
+		// filter indexes
+		.filter( f => f !== 'index' );
+
+	return files;
+
+};
 
 
 // :: ( str: string, { file: bool } ) → object
