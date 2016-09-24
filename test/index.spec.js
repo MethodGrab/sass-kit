@@ -77,6 +77,9 @@ test( `compiles with zero output: '_index.scss'`, async t => {
 test( `'_index.scss'`, compilesSuccessfullyMacro, path.join( __dirname, '../_index.scss' ) );
 
 
+test( `mixin '_font-face.scss'`, [ compilesSuccessfullyMacro, compiledMatchesExpectedMacro ], fixture( `/input/mixins/_font-face.scss` ), fixture( `/expected/mixins/font-face.css` ) );
+
+
 test( `mixin '_responsive.scss'`, [ compilesSuccessfullyMacro, compiledMatchesExpectedMacro ], fixture( `/input/mixins/_responsive-basic.scss` ), fixture( `/expected/mixins/responsive-basic.css` ) );
 
 

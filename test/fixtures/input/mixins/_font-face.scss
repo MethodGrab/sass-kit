@@ -1,0 +1,12 @@
+@import 'index';
+
+@include font-face( 'NeuzeitGro', font( '2A088F_4_0', true ), 400 );
+@include font-face( 'OpenSans', font( 'open-sans', true ), 300, normal, woff2 ttf );
+
+body {
+	font-family: 'OpenSans', sans-serif;
+}
+
+h1 {
+	font-family: 'NeuzeitGro', sans-serif;
+}

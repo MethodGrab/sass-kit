@@ -15,8 +15,8 @@
 //
 // @example
 // ```
-// @include font-face( 'NeuzeitGro', font( '2A088F_4_0', true ), 400 )
-// body { font-face: 'NeuzeitGro'; }
+// @include font-face( 'NeuzeitGro', font( '2A088F_4_0', true ), 400 );
+// body { font-family: 'NeuzeitGro', sans-serif; }
 // ```
 //
 @mixin font-face( $name, $path, $weight: normal, $style: normal, $exts: eot woff2 woff ttf svg ) {
@@ -24,7 +24,7 @@
 
 	$extmods: (
 		eot: '?#iefix',
-		svg: '#' + str-replace( $name, ' ', '_' )
+		svg: '#' + strReplace( $name, ' ', '_' )
 	);
 
 	$formats: (
@@ -45,7 +45,7 @@
 		font-style: $style;
 
 		@if index( $exts, eot ) {
-			src: url( $path );
+			src: url( $path + '.eot' );
 		}
 
 		src: $src;
