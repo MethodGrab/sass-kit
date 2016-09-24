@@ -1,4 +1,4 @@
-# Sass Kit
+# Sass Kit [![Build Status](https://travis-ci.org/MethodGrab/sass-kit.svg?branch=master)](https://travis-ci.org/MethodGrab/sass-kit) [![npm](https://img.shields.io/npm/v/sass-kit.svg)](https://www.npmjs.com/package/sass-kit)
 > A collection of Sass functions & mixins.
 
 
