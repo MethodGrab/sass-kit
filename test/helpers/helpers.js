@@ -16,14 +16,10 @@ export const read = ( _path ) => fs.readFileAsync( _path, 'utf-8' );
 export const fixture = ( ...args ) => path.join( __dirname, '../fixtures', ...args );
 
 
-// :: ( type: string ) → array
-// Get a list of files in a directory
-export const getFiles = async ( type ) => {
-	const testsPath = path.join( __dirname, '../../', type );
-
-	let files = await fs.readdirAsync( testsPath );
-
-	files = files
+// :: ( files: array ) → array
+// Filter the list of files
+const filterFiles = ( files ) => {
+	return files
 		// remove ext
 		.map( f => f.replace( path.extname( f ), '' ) )
 
@@ -32,9 +28,22 @@ export const getFiles = async ( type ) => {
 
 		// filter indexes
 		.filter( f => f !== 'index' );
+};
 
-	return files;
 
+// :: ( type: string ) → array
+// Get a list of files in a directory
+export const getFiles = async ( type ) => {
+	const testsPath = path.join( __dirname, '../../', type );
+	return filterFiles( await fs.readdirAsync( testsPath ) );
+};
+
+
+// :: ( type: string ) → array
+// Get a list of files in a directory
+export const getFilesSync = ( type ) => {
+	const testsPath = path.join( __dirname, '../../', type );
+	return filterFiles( fs.readdirSync( testsPath ) );
 };
 
 

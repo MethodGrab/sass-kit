@@ -2,7 +2,7 @@ import _fs     from 'fs';
 import path    from 'path';
 import Promise from 'bluebird';
 import test    from 'ava';
-import { compile, read, fixture, getFiles } from './helpers/helpers';
+import { compile, read, fixture, getFilesSync } from './helpers/helpers';
 
 const fs = Promise.promisifyAll( _fs );
 const debug = require( 'debug' )( 'sass-kit:tests' );
@@ -53,17 +53,11 @@ const compilesSuccessfullyMacro = async ( t, input, expected ) => {
 compilesSuccessfullyMacro.title = ( providedTitle, input ) => `compiles without errors or warnings: ${providedTitle}`;
 
 
-// :: (  ) → null
-// Programatically create the tests
-const runProgramaticTests = async () => {
-	const functionFiles = await getFiles( 'functions' );
+const functionFiles = getFilesSync( 'functions' );
 
-	functionFiles.forEach( ( file ) => {
-		test( `function '${file}'`, [ compilesSuccessfullyMacro, compiledMatchesExpectedMacro ], fixture( `/input/functions/_${file}.scss` ), fixture( `/expected/functions/${file}.css` ) );
-	});
-};
-
-runProgramaticTests();
+functionFiles.forEach( file => {
+	test( `function '${file}'`, [ compilesSuccessfullyMacro, compiledMatchesExpectedMacro ], fixture( `/input/functions/_${file}.scss` ), fixture( `/expected/functions/${file}.css` ) );
+});
 
 
 test( `compiles with zero output: '_index.scss'`, async t => {

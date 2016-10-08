@@ -13,7 +13,7 @@
     "helpers"
   ],
   "scripts": {
-    "test": "npm run lint && npm run ava",
+    "test": "npm run lint && ava",
     "ava": "ava",
     "lint": "eslint **/*.js"
   },
