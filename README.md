@@ -33,16 +33,16 @@ See the source and tests for examples.
 
 ### Functions
 
-#### `str-replace( $source: string, $find: string, $replace: string )` → string
+#### `strReplace( $source: string, $find: string, $replace: string )` → string
 String replacement
 
-#### `strip-units( $val: value )` → number
+#### `stripUnits( $val: value )` → number
 Remove units from a value
 
-#### `lower-bound( $range: array )` → number
+#### `lowerBound( $range: array )` → number
 Get the lower bound of an array
 
-#### `upper-bound( $range: array )` → number
+#### `upperBound( $range: array )` → number
 Get the upper bound of an array
 
 #### `em( $px: value, $base: ?value )` → value
@@ -63,7 +63,7 @@ Get a value from the color palette
 #### `ls( $val: number )` → value
 Convert Photoshop "tracking" to CSS letter spacing
 
-#### `nested-border-radius( $outer-size: value, $padding: value )` → value
+#### `nestedBorderRadius( $outer-size: value, $padding: value )` → value
 Calculate correct nested border radii sizes
 
 
