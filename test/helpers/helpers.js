@@ -67,8 +67,8 @@ export const compile = ( str, { file = true } = {} ) => {
 				'@warn' : ( warning ) => {
 					warnings.push( warning.getValue() );
 					return sass.NULL;
-				}
-			}
+				},
+			},
 		};
 
 		if ( file ) {
