@@ -15,7 +15,7 @@
   "scripts": {
     "test": "npm run lint && ava",
     "ava": "ava",
-    "lint": "eslint **/*.js"
+    "lint": "eslint \"**/*.js\""
   },
   "main": "_index.scss",
   "devDependencies": {
